@@ -1,7 +1,7 @@
 ## These functions provide a mechanism for returning the inverse of a given matrix.  If that inverse has
 ## already been calculated, the cached calculated inverse of the matrix will be returned.
 
-## This function just contains a list of sub-functions to get and set the matrix and get and set the inverse 
+## This function just returns a list of functions to get and set the matrix and get and set the inverse 
 ## of the matrix.
 
 makeCacheMatrix <- function(x = matrix()) {
@@ -10,7 +10,7 @@ makeCacheMatrix <- function(x = matrix()) {
   
   set <- function (y) {
     x <<- y
-    x_inverse <- NULL
+    x_inverse <<- NULL
   }
   
   get <- function() x
@@ -33,12 +33,15 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
   x_inverse <- x$get_inverse()
+  
   if (!is.null(x_inverse)) {
     message("Getting cached data")
     return(x_inverse)
   }
+  
   data <- x$get()
   x_inverse <- solve(x$get())
   x$set_inverse(x_inverse)
   x_inverse
+
 }
